@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "objekt_api"
+version = "0.0.1"
+authors = [
+    {name="Devin Thai", email="devin.thai.5@gmail.com"},
+]
+description = "An api wrapper around objekt.top's api"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+keywords = ["objekt", "tripleS"]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "requests",
+    "typing",
+    "logging",
+    "pydantic",
+]
+
+[project.urls]
+Repository = "https://github.com/devinthai/objekt_api" 

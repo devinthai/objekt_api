@@ -1,0 +1,2 @@
+class ObjektApiException(Exception):
+    pass
