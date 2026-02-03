@@ -25,4 +25,3 @@ class Metadata(BaseModel):
     total: int
     spin: int
     transferable: int
-    createdAt: str
