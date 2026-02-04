@@ -2,9 +2,9 @@ from pydantic import BaseModel, Field
 from typing import List
 
 class Slug(BaseModel):
-    id: str 
+    slugId: str = Field(alias='id')
     createdAt: str 
-    slug: str 
+    slugString: str = Field(alias='slug')
     collectionId: str
     season: str 
     member: str 
