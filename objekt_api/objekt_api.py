@@ -15,24 +15,26 @@ class ObjektApi:
 
         return collection.collections
 
-    def get_metadata(self, slug: str) -> Metadata:
+    def get_metadata(self, slug: str) -> dict:
         metadata_endpoint = f'/objekts/metadata/{slug}'
         res = self._http.get(metadata_endpoint)
 
         slug_metadata = Metadata.model_validate_json(res.data)
 
-        return slug_metadata
+        metadata_dict = {
+            'slug': slug,
+            'metadata': slug_metadata
+        }
+
+        return metadata_dict
 
     def get_bulk_metadata(self, slugs: List[str]):
         """
         slugs: list of slugStrings to get metadata for 
+        return:
+            res: a list of dicts where each dict contains the slugString to its metadata
         """
-        endpoints = [f"/objekts/metadata/{slug}" for slug in slugs]
-
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-            res = executor.map(self._http.get, endpoints)
+            res = executor.map(self.get_metadata, slugs)
 
-        metadata_jsons = [row.data for row in res]
-
-        validated_metadata_list = [Metadata.model_validate_json(metadata) for metadata in metadata_jsons]
-        return validated_metadata_list
+        return res
