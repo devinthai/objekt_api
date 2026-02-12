@@ -32,6 +32,7 @@ class ObjektApi:
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
             res = executor.map(self._http.get, endpoints)
 
+        metadata_jsons = [row.data for row in res]
 
-        validated_metadata_list = [Metadata.model_validate_json(metadata) for metadata in res]
+        validated_metadata_list = [Metadata.model_validate_json(metadata) for metadata in metadata_jsons]
         return validated_metadata_list
